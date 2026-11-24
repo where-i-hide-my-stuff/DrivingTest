@@ -1,5 +1,7 @@
 // Shared quiz engine. Reads window.CATEGORIES (filled by the files in /data).
 (function () {
+  var BRAND = 'HijaziSchool270'; // small name badge on each card (set '' to hide)
+  var CHECK = ' <svg width="14" height="14" viewBox="0 0 14 14"><circle cx="7" cy="7" r="7" fill="#3b9cff"/><path d="M4 7.2l2 2 4-4" stroke="#fff" stroke-width="1.6" fill="none"/></svg>';
   var PART_SIZE = 30; // questions per part: 1-30, 31-60, ...
   var CATEGORIES = window.CATEGORIES || [];
 
@@ -49,7 +51,8 @@
     var h = '', c = S.cat;
     if (S.view === 'home') {
       h = top(t('app'), null) + '<p>' + t('pick') + '</p><div class="dq-grid">' + CATEGORIES.map(function (x, i) {
-        return '<button class="dq-card" data-act="cat:' + i + '">' + (x.image ? '<img src="' + x.image + '" alt="">' : '') + '<b>' + x.title[lang] + '</b><span>1 - ' + x.questions.length + ' · ' + t('questions') + '</span></button>';
+        var n = x.questions.length;
+        return '<button class="dq-card" data-act="cat:' + i + '"><span class="dq-ph">' + (x.image ? '<img src="' + x.image + '" alt="">' : '') + '<span class="dq-badge">' + n + ' ' + t('questions') + '</span><span class="dq-by">' + BRAND + CHECK + '</span></span><b>' + x.title[lang] + '</b><span class="dq-rng">1 - ' + n + '</span></button>';
       }).join('') + '</div>';
     } else if (S.view === 'parts') {
       h = top(c.title[lang], 'home') + '<p>' + t('pickPart') + '</p><div class="dq-grid">' + partsOf(c).map(function (p, i) {

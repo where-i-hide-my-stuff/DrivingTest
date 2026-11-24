@@ -1,5 +1,5 @@
 window.CATEGORIES = window.CATEGORIES || [];
-window.CATEGORIES.push({ title: { ar: 'الدراجات النارية', en: 'Motorcycles' }, image: '', questions: [
+window.CATEGORIES.push({ title: { ar: 'الدراجات النارية', en: 'Motorcycles' }, image: 'images/categories/motorcycles.svg', questions: [
   { q: 'ما أهم قطعة حماية عند ركوب الدراجة النارية؟', options: ['الخوذة', 'القفازات الصيفية فقط', 'نظارة شمسية'], answer: 0, image: '' },
   { q: 'عند القيادة على طريق مبلل بالمطر يجب:', options: ['تخفيف السرعة وزيادة مسافة الأمان', 'التسارع للوصول أسرع', 'الكبح الحاد المفاجئ'], answer: 0, image: '' },
   { q: 'يجب أن تكون أضواء الدراجة النارية:', options: ['صالحة وتعمل عند الحاجة', 'مطفأة نهاراً دائماً', 'غير مهمة'], answer: 0, image: '' }

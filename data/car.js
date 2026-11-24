@@ -1,5 +1,5 @@
 window.CATEGORIES = window.CATEGORIES || [];
-window.CATEGORIES.push({ title: { ar: 'أسئلة السيارة', en: 'Car questions' }, image: '', questions: [
+window.CATEGORIES.push({ title: { ar: 'أسئلة السيارة', en: 'Car questions' }, image: 'images/categories/car.svg', questions: [
       { q: 'اللون الأسود حوالين الزجاج الأمامي والخلفي كرمال شو؟', options: ['يمتص الحرارة حتى ما يفقع الزجاج تحت الشمس', 'للزينة فقط', 'لحماية الزجاج من الغبار'], answer: 0, image: '' },
       { q: 'الخطوط البنية الموجودة ورا على الزجاج كرمال شو؟', options: ['مقاومات بتعلّي الحرارة لتبخّر الرطوبة عن الزجاج', 'للزينة فقط', 'لتخفيف أشعة الشمس'], answer: 0, image: '' },
       { q: 'ال car seat لأي عمر بكون ورا؟', options: ['٥ سنين', '١٠ سنين', '١٥ سنة'], answer: 0, image: '' },
