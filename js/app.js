@@ -6,8 +6,8 @@
   var CATEGORIES = window.CATEGORIES || [];
 
   var T = {
-    ar: { app: 'اختبار النظرية', pick: 'اختر قسماً', q: 'سؤال', score: 'الإجابات الصحيحة', retry: 'إعادة المحاولة', home: 'الرئيسية', questions: 'سؤال', lang: 'English' },
-    en: { app: 'Theory test', pick: 'Choose a category', q: 'Question', score: 'Correct answers', retry: 'Try again', home: 'Home', questions: 'questions', lang: 'العربية' }
+    ar: { app: 'اختبار النظرية', pick: 'اختر قسماً', q: 'سؤال', score: 'الإجابات الصحيحة', retry: 'إعادة المحاولة', home: 'الرئيسية', questions: 'سؤال', best: 'الأفضل', lang: 'English' },
+    en: { app: 'Theory test', pick: 'Choose a category', q: 'Question', score: 'Correct answers', retry: 'Try again', home: 'Home', questions: 'questions', best: 'Best', lang: 'العربية' }
   };
 
   var root = document.getElementById('dq-app');
@@ -23,6 +23,15 @@
       x = b[i]; b[i] = b[j]; b[j] = x;
     }
     return b;
+  }
+
+  // Best score per category + tab, kept in the student's own browser (no server).
+  function bestKey() { return 'dq-best:' + S.cat.title.en + ':' + S.pi; }
+  function getBest() {
+    try { return +localStorage.getItem(bestKey()) || 0; } catch (e) { return 0; }
+  }
+  function saveBest() {
+    try { if (S.score > getBest()) localStorage.setItem(bestKey(), S.score); } catch (e) {}
   }
 
   function partsOf(c) {
@@ -49,7 +58,7 @@
   function qHTML(i) {
     var q = S.qs[i], done = q.pick !== null;
     var h = '<div class="dq-qc" id="dq-q' + i + '" dir="rtl">';
-    if (q.image) h += '<img class="dq-img" src="' + q.image + '" alt="">';
+    if (q.image) h += '<img class="dq-img" loading="lazy" src="' + q.image + '" alt="">';
     h += '<div class="dq-q"><b>' + t('q') + ' ' + (i + 1) + ':</b> ' + q.q + '</div>';
     q.o.forEach(function (o, k) {
       var cls = 'dq-opt', ic = '';
@@ -73,7 +82,7 @@
     } else {
       h = top(c.title[lang], true) + '<div class="dq-tabs">' + partsOf(c).map(function (p, k) {
         return '<button class="dq-tab' + (k === S.pi ? ' dq-on' : '') + '" data-act="part:' + k + '">' + p.label + '</button>';
-      }).join('') + '</div><div class="dq-sc">' + t('score') + ': <b id="dq-sc">' + S.score + ' / ' + S.qs.length + '</b></div>';
+      }).join('') + '</div><div class="dq-sc">' + t('score') + ': <b id="dq-sc">' + S.score + ' / ' + S.qs.length + '</b> &nbsp;|&nbsp; ' + t('best') + ': <b id="dq-best">' + getBest() + ' / ' + S.qs.length + '</b></div>';
       for (i = 0; i < S.qs.length; i++) h += qHTML(i);
       h += '<div class="dq-end"><button class="dq-pri" data-act="retry">' + t('retry') + '</button><button data-act="home">' + t('home') + '</button></div>';
     }
@@ -89,16 +98,36 @@
       if (q.pick !== null) return;
       q.pick = +a[2];
       if (q.o[q.pick].ok) S.score++;
+      saveBest();
       document.getElementById('dq-q' + i).outerHTML = qHTML(i);
       document.getElementById('dq-sc').textContent = S.score + ' / ' + S.qs.length;
+      document.getElementById('dq-best').textContent = getBest() + ' / ' + S.qs.length;
       return;
     }
     if (k === 'lang') lang = lang === 'ar' ? 'en' : 'ar';
-    else if (k === 'home') S = { view: 'home' };
-    else if (k === 'cat') { S = { cat: CATEGORIES[+a[1]] }; startPart(0); window.scrollTo(0, 0); }
+    else if (k === 'home') {
+      // go through history so the in-app Home button and the phone Back button agree
+      if (S.view !== 'home' && history.state && history.state.v === 'cat') { history.back(); return; }
+      S = { view: 'home' };
+    }
+    else if (k === 'cat') {
+      S = { cat: CATEGORIES[+a[1]] }; startPart(0);
+      history.pushState({ v: 'cat' }, '');
+      window.scrollTo(0, 0);
+    }
     else if (k === 'part') { startPart(+a[1]); window.scrollTo(0, 0); }
     else if (k === 'retry') { startPart(S.pi); window.scrollTo(0, 0); }
     draw();
+  });
+
+  // Phone Back button: from a category go to Home first; from Home it leaves the page.
+  history.replaceState({ v: 'home' }, '');
+  window.addEventListener('popstate', function () {
+    if (S.view !== 'home') {
+      S = { view: 'home' };
+      draw();
+      window.scrollTo(0, 0);
+    }
   });
 
   draw();
