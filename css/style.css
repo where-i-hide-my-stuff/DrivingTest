@@ -27,9 +27,9 @@ body{margin:0;background:#faf7f0}
 #dq-app .dq-qc{background:#fff;border:1px solid #e3e3e3;border-radius:8px;padding:20px;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
 #dq-app .dq-q{font-size:17px;line-height:1.7;margin:0 0 14px;text-align:right}
 #dq-app .dq-q b{color:#243557}
-#dq-app .dq-img{display:block;margin:0 auto 14px;max-width:100%;max-height:200px}
 #dq-app .dq-opt{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:right;margin-bottom:10px;background:#f9f9f9;border:1px solid #e3e3e3;border-radius:6px;padding:14px 16px;font-size:16px}
 #dq-app .dq-opt i{font-style:normal;font-size:18px;margin-inline-start:12px}
 #dq-app .dq-ok{background:#e0f1e5 !important;border-color:#6fc08a !important;color:#2f6f45}
 #dq-app .dq-bad{background:#fbe0e3 !important;border-color:#e8a4ab !important;color:#8a3b45}
 #dq-app .dq-end{display:flex;gap:10px;justify-content:center;margin:8px 0 32px}
+#dq-app .dq-img{display:block;margin:0 auto 14px;height:110px;max-width:100%;padding:10px;background:#f6f6f6;border:1px solid #e3e3e3;border-radius:8px;object-fit:contain}
