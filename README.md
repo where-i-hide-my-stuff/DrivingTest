@@ -75,3 +75,17 @@ More categories (for example insurance) can be added later.
 3. The four category pages with sample questions.
 4. Owner adds the real questions and images.
 5. Test every page on a phone.
+
+## Project structure
+
+```
+index.html            page shell, loads the data files and the engine
+css/style.css         all styling
+js/app.js             shared quiz engine (home, parts, quiz, result, AR/EN)
+data/*.js             one question list per category (signs, law, motorcycles, trucks, car)
+images/signs/         sign images (sign-001.png, sign-002.png ...)
+questions/            raw blocks and the 30-question template to copy from
+```
+
+To add a category: create `data/<name>.js` (copy an existing one) and add one
+`<script>` line for it in `index.html`.
