@@ -6,11 +6,12 @@
   var CATEGORIES = window.CATEGORIES || [];
 
   var T = {
-    ar: { app: 'اختبار النظرية', pick: 'اختر قسماً', q: 'سؤال', score: 'الإجابات الصحيحة', retry: 'إعادة المحاولة', home: 'الرئيسية', questions: 'سؤال', best: 'الأفضل' }
+    ar: { app: 'اختبار النظرية', pick: 'اختر قسماً', q: 'سؤال', score: 'الإجابات الصحيحة', retry: 'إعادة المحاولة', home: 'الرئيسية', questions: 'سؤال', best: 'الأفضل', lang: 'English' },
+    en: { app: 'Theory test', pick: 'Choose a category', q: 'Question', score: 'Correct answers', retry: 'Try again', home: 'Home', questions: 'questions', best: 'Best', lang: 'العربية' }
   };
 
   var root = document.getElementById('dq-app');
-  var lang = 'ar'; // Arabic only for now
+  var lang = 'ar';
   var S = { view: 'home' };
 
   function t(k) { return T[lang][k]; }
@@ -51,7 +52,7 @@
 
   function top(title, back) {
     var left = back ? '<button data-act="home">' + t('home') + '</button>' : '<span></span>';
-    return '<div class="dq-top">' + left + '<b>' + title + '</b><span></span></div>';
+    return '<div class="dq-top">' + left + '<b>' + title + '</b><button data-act="lang">' + t('lang') + '</button></div>';
   }
 
   function qHTML(i) {
@@ -71,7 +72,7 @@
   }
 
   function draw() {
-    root.setAttribute('dir', 'rtl');
+    root.setAttribute('dir', lang === 'ar' ? 'rtl' : 'ltr');
     var h = '', c = S.cat, i;
     if (S.view === 'home') {
       h = top(t('app'), false) + '<p>' + t('pick') + '</p><div class="dq-grid">' + CATEGORIES.map(function (x, i) {
@@ -103,7 +104,8 @@
       document.getElementById('dq-best').textContent = getBest() + ' / ' + S.qs.length;
       return;
     }
-    if (k === 'home') {
+    if (k === 'lang') lang = lang === 'ar' ? 'en' : 'ar';
+    else if (k === 'home') {
       // go through history so the in-app Home button and the phone Back button agree
       if (S.view !== 'home' && history.state && history.state.v === 'cat') { history.back(); return; }
       S = { view: 'home' };
