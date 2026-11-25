@@ -11,14 +11,14 @@ body{margin:0;background:#faf7f0}
 #dq-app .dq-msg{margin:12px 0;font-size:15px}
 #dq-app .dq-score{text-align:center;padding:24px 0}
 #dq-app .dq-score b{display:block;font-size:44px;margin:6px 0}
-#dq-app .dq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
-#dq-app .dq-card{position:relative;overflow:hidden;display:block;text-align:start;background:#fffdf9;border:0;border-radius:18px;padding:12px 12px 18px;box-shadow:0 6px 24px rgba(0,0,0,.07)}
-#dq-app .dq-card::after{content:"";position:absolute;left:-26px;bottom:-26px;width:86px;height:86px;border-radius:50%;background:#f1efeb}
+#dq-app .dq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+#dq-app .dq-card{position:relative;overflow:hidden;display:block;text-align:start;background:#fffdf9;border:0;border-radius:18px;padding:12px 12px 28px;box-shadow:0 6px 24px rgba(0,0,0,.07)}
+#dq-app .dq-card::after{content:"";position:absolute;inset-inline-start:-26px;bottom:-26px;width:86px;height:86px;border-radius:50%;background:#f1efeb}
 #dq-app .dq-card:hover{box-shadow:0 8px 28px rgba(72,45,255,.18)}
-#dq-app .dq-ph{position:relative;display:flex;align-items:center;justify-content:center;height:130px;background:#fff;border-radius:12px;margin-bottom:14px}
-#dq-app .dq-ph img{max-width:90%;max-height:100px}
-#dq-app .dq-by{bottom:8px;right:8px}
-#dq-app .dq-card b{display:block;font-size:18px;padding:0 4px}
+#dq-app .dq-ph{position:relative;display:flex;align-items:center;justify-content:center;height:140px;background:#fff;border-radius:12px;margin-bottom:14px}
+#dq-app .dq-ph img{max-width:90%;max-height:120px}
+#dq-app .dq-by{position:absolute;bottom:8px;right:8px;display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid #e3e3e3;border-radius:999px;padding:2px 9px;font-size:12px;white-space:nowrap}
+#dq-app .dq-card b{display:block;font-size:18px;padding:0 4px 8px;position:relative;z-index:1}
 #dq-app .dq-rng{position:relative;z-index:1;display:block;font-size:13px;color:#6b6780;padding:4px 4px 0}
 #dq-app .dq-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:4px 0 16px}
 #dq-app .dq-tab{border-radius:6px;padding:10px 22px;font-size:14px}
@@ -33,3 +33,4 @@ body{margin:0;background:#faf7f0}
 #dq-app .dq-bad{background:#fbe0e3 !important;border-color:#e8a4ab !important;color:#8a3b45}
 #dq-app .dq-end{display:flex;gap:10px;justify-content:center;margin:8px 0 32px}
 #dq-app .dq-img{display:block;margin:0 auto 14px;height:110px;max-width:100%;padding:10px;background:#f6f6f6;border:1px solid #e3e3e3;border-radius:8px;object-fit:contain}
+#dq-app .dq-badge{position:absolute;top:8px;left:8px;background:#f1efeb;color:#6b6780;border-radius:999px;padding:2px 10px;font-size:12px}
